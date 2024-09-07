@@ -182,7 +182,17 @@
     </Link>
   </ItemDefinitionGroup>
   <ItemGroup>
+    <ClCompile Include="Heroes.cpp" />
     <ClCompile Include="main.cpp" />
+    <ClCompile Include="Monsters.cpp" />
+    <ClCompile Include="Positive_Heroes.cpp" />
+    <ClCompile Include="Villains.cpp" />
+  </ItemGroup>
+  <ItemGroup>
+    <ClInclude Include="Heroes.h" />
+    <ClInclude Include="Monsters.h" />
+    <ClInclude Include="Positive_Heroes.h" />
+    <ClInclude Include="Villains.h" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
   <ImportGroup Label="ExtensionTargets">

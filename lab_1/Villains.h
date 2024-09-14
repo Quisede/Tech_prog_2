@@ -1,32 +1,38 @@
 #pragma once
 #include "Heroes.h"
-class Villains :
-    public Heroes
+#include "LinkedList.h"
+#include <iostream>
+#include <string>
+using namespace std;
+
+//класс злодеи
+class Villains : public Heroes
 {
 private:
-    char name[50]; //имя
-    char wearponType[50]; //тип оружия
-    char crime[100]; //преступление
-    char location[50]; //место обитания
-    char skills[100]; //навыки
+    string wearponType; //тип оружия
+    string crime; //преступление
+    string location; //место обитания
+    string skills; //навыки
 public:
     Villains();//конструктор по умолчанию
-    Villains(char* n, char* w, char* c, char* l, char* s);//конструктор с параметрами
+    Villains(string& n, string& w, string& c, string& l, string& s);//конструктор с параметрами
     Villains(const Villains& copy);//конструктор копирования
     ~Villains();//деструктор
 
     //сеттеры
-    void setName(char* n);
-    void setWearponType(char* w);
-    void setCrime(char* c);
-    void setLocation(char* l);
-    void setSkills(char* s);
+    void setWearponType(string& w);
+    void setCrime(string& c);
+    void setLocation(string& l);
+    void setSkills(string& s);
 
-    //геттеры
-    const char* getName() const;
-    const char* getWearponType() const;
-    const char* getCrime() const;
-    const char* getLocation() const;
-    const char* getSkills() const;
+    //геттеры 
+    string getWearponType() const;
+    string getCrime() const;
+    string getLocation() const;
+    string getSkills() const;
+
+    //функции
+    void inputData();//ввод данных пользователем
+    void print();//вывод данных на экран
+    void printInfo() const; //вывод данных на экран
 };
-

@@ -1,76 +1,98 @@
 #include "Villains.h"
 #include <iostream>
 #include <string>
+using namespace std;
 
-Villains::Villains() {
-    strcpy(name, "");
-    strcpy(wearponType, "");
-    strcpy(crime, "");
-    strcpy(location, "");
-    strcpy(skills, "");
+//конструкторы и деструкторы
+Villains::Villains() : 
+    Heroes(), wearponType(""), crime(""), location(""), skills("") {}
+
+Villains::Villains(string& n, string& w, string& c, string& l, string& s) :
+    Heroes(), wearponType(w), crime(c), location(l), skills(s) {}
+/*
+Villains::Villains(const Villains& copy) :
+    name(copy.name), wearponType(copy.wearponType), crime(copy.crime), location(copy.location), skills(copy.skills) {}
+    */
+
+Villains::~Villains() {}
+
+//сеттеры
+/*
+void Villains::setName(string& n) {
+    name = n;
+}
+*/
+void Villains::setWearponType(string& w) {
+    wearponType = w;
 }
 
-Villains::Villains(char* n, char* w, char* c, char* l, char* s) {
-    strcpy(name, n);
-    strcpy(wearponType, w);
-    strcpy(crime, c);
-    strcpy(location, l);
-    strcpy(skills, s);
+void Villains::setCrime(string& c) {
+    crime = c;
 }
 
-Villains::Villains(const Villains& copy) {
-    strcpy(name, copy.name);
-    strcpy(wearponType, copy.wearponType);
-    strcpy(crime, copy.crime);
-    strcpy(location, copy.location);
-    strcpy(skills, copy.skills);
+void Villains::setLocation(string& l) {
+    location = l;
 }
 
-
-Villains::~Villains() {
+void Villains::setSkills(string& s) {
+    skills = s;
 }
 
-void Villains::setName(char* n) {
-    strncpy(name, n, sizeof(name) - 1);
-    name[sizeof(name) - 1] = '\0';
-}
-
-void Villains::setWearponType(char* n) {
-    strncpy(wearponType, n, sizeof(wearponType) - 1);
-    wearponType[sizeof(wearponType) - 1] = '\0';
-}
-
-void Villains::setCrime(char* c) {
-    strncpy(crime, c, sizeof(crime) - 1);
-    crime[sizeof(crime) - 1] = '\0';
-}
-
-void Villains::setLocation(char* l) {
-    strncpy(location, l, sizeof(location) - 1);
-    location[sizeof(location) - 1] = '\0';
-}
-
-void Villains::setSkills(char* n) {
-    strncpy(skills, n, sizeof(skills) - 1);
-    skills[sizeof(skills) - 1] = '\0';
-}
-
-const char* Villains::getName() const {
+//геттеры
+/*
+string Villains::getName() const {
     return name;
 }
-
-const char* Villains::getWearponType() const {
+*/
+string Villains::getWearponType() const {
     return wearponType;
 }
 
-const char* Villains::getCrime() const {
+string Villains::getCrime() const {
     return crime;
 }
 
-const char* Villains::getLocation() const {
+string Villains::getLocation() const {
     return location;
 }
 
-const char* Villains::getSkills() const {
+string Villains::getSkills() const {
     return skills;
+}
+
+void Villains::inputData() {
+
+    cout << "Введите имя Злодея: ";
+    string inputName;
+    cin >> inputName;
+    setName(inputName);
+
+    cout << "Введите тип оружия: ";
+    string inputWT;
+    cin >> inputWT;
+    setWearponType(inputWT);
+
+    cout << "Введите преступления: ";
+    string inputCrime;
+    cin >> inputCrime;
+    setCrime(inputCrime);
+
+    cout << "Введите локацию: ";
+    string inputLocation;
+    cin >> inputLocation;
+    setLocation(inputLocation);
+
+    cout << "Введите скиллы: ";
+    string inputSkills;
+    cin >> inputSkills;
+    setSkills(inputSkills);
+}
+
+void Villains::printInfo() const {
+    cout << "МОНСТР" << endl;
+    cout << "Name: " << getName() << endl;
+    cout << "Wearpon Type: " << getWearponType() << endl;
+    cout << "Crime: " << getCrime() << endl;
+    cout << "Location: " << getLocation() << endl;
+    cout << "Skills: " << getSkills() << endl;
 }

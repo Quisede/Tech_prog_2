@@ -1,24 +1,32 @@
 #pragma once
 #include "Heroes.h"
-class Monsters :
-    public Heroes
+#include "LinkedList.h"
+#include <iostream>
+#include <string>
+using namespace std;
+
+//класс монстры
+class Monsters : public Heroes
 {
 private:
-    char name[50];
-    char description[200];
+    string description;//описание
 
 public:
     Monsters();//конструктор по умолчанию
-    Monsters(char* n, char* d);//конструктор с параметрами
+    Monsters(const string& n, const string& d); // конструктор с параметрами
     Monsters(const Monsters& copy);//конструктор копирования
     ~Monsters();//деструктор
 
     //сеттеры
-    void setName(char* n);
-    void setDescription(char* d);
+    //void setName(string& n);
+    void setDescription(string& d);
 
     //геттеры
-    const char* getName() const;
-    const char* getDescription() const;
+    //string getName() const;
+    string getDescription() const;
+
+    //функции
+    void inputData();//ввод данных пользователем
+    void printInfo() const; //вывод данных на экран
 };
 

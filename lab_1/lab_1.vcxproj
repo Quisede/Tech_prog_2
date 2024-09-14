@@ -183,6 +183,8 @@
   </ItemDefinitionGroup>
   <ItemGroup>
     <ClCompile Include="Heroes.cpp" />
+    <ClCompile Include="Keeper.cpp" />
+    <ClCompile Include="LinkedList.cpp" />
     <ClCompile Include="main.cpp" />
     <ClCompile Include="Monsters.cpp" />
     <ClCompile Include="Positive_Heroes.cpp" />
@@ -190,6 +192,8 @@
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="Heroes.h" />
+    <ClInclude Include="Keeper.h" />
+    <ClInclude Include="LinkedList.h" />
     <ClInclude Include="Monsters.h" />
     <ClInclude Include="Positive_Heroes.h" />
     <ClInclude Include="Villains.h" />

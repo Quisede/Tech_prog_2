@@ -2,6 +2,7 @@
 #include "Heroes.h"
 #include <iostream>
 #include <string>
+#include <fstream>
 using namespace std;
 
 
@@ -75,7 +76,53 @@ void Positive_Heroes::print() {
 
 void Positive_Heroes::printInfo() const {
     cout << "ГЕРОЙ" << endl;
-    cout << "Name: " << getName() << endl;
-    cout << "WearponType: " << getWearponType() << endl;
-    cout << "Skills: " << getSkills() << endl;
+    cout << "Имя: " << getName() << endl;
+    cout << "Тип оружия: " << getWearponType() << endl;
+    cout << "Скиллы: " << getSkills() << endl;
+    cout << "\n";
+}
+
+void Positive_Heroes::saveToFile(ofstream& file) const {
+    file << "Positive_Heroes" << endl;
+    Heroes::saveToFile(file);
+    file << getWearponType() << endl;
+    file << getSkills() << endl;
+}
+
+void Positive_Heroes::loadFromFile(ifstream& file) {
+    //getline(file, name);
+    file >> name;
+    file >> wearponType; 
+    file >> skills;
+}
+
+void Positive_Heroes::changeSpec() {
+    int answer = 0;
+    cout << "Что вы хотите изменить?\n1 - Имя\n2 - Тип оружия\n3 - Скиллы" << endl;
+    cin >> answer;
+    if (answer == 1) {
+        cout << "Введите новое имя" << endl;
+        string new_name;
+        cin >> new_name;
+        name = new_name;
+        cout << "Данные успешно изменены" << endl;
+    }
+    else if (answer == 2) {
+        cout << "Введите новый тип оружия" << endl;
+        string new_WT;
+        cin >> new_WT;
+        wearponType = new_WT;
+        cout << "Данные успешно изменены" << endl;
+
+    }
+    else if (answer == 3) {
+        cout << "Введите новый скилл" << endl;
+        string new_Skill;
+        cin >> new_Skill;
+        skills = new_Skill;
+        cout << "Данные успешно изменены" << endl;
+    }
+    else {
+        cout << "Неверное значение, попробуйте снова" << endl;
+    }
 }

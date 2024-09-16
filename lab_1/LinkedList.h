@@ -20,6 +20,8 @@ public:
 
 	void add(Heroes* hero);//добавление объекта в список
 	void print() const;
+	void printTypeHero(int type) const;
 	Node& operator[](int id);
 	Node* getHead() { return head; }
+	void setHead(Node* newHead) { head = newHead; }
 };

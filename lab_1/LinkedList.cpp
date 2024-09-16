@@ -1,6 +1,7 @@
 #include "LinkedList.h"
 #include "Monsters.h"
 #include "Positive_Heroes.h"
+#include "Villains.h"
 #include <iostream>
 
 using namespace std;
@@ -38,5 +39,28 @@ Node& List::operator[](int id) {
         }
         current = current->next;
         count++;
+    }
+}
+
+void List::printTypeHero(int type) const {
+    Node* current = head;
+    while (current != nullptr) {
+        //определяем тип
+        if (dynamic_cast<Positive_Heroes*>(current->hero) && type == 1) {
+            //cout << "Тип персонажа: Герой\n";
+            current->hero->printInfo(); // Вызов виртуального метода
+         
+        }
+        else if (dynamic_cast<Villains*>(current->hero) && type == 2) {
+            //cout << "Тип персонажа: Злодей\n";
+            current->hero->printInfo(); // Вызов виртуального метода
+            
+        }
+        else if (dynamic_cast<Monsters*>(current->hero) && type == 3) {
+            //cout << "Тип персонажа: Монстр\n";
+            current->hero->printInfo(); // Вызов виртуального метода
+            
+        }
+        current = current->next;
     }
 }

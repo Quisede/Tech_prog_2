@@ -13,10 +13,9 @@ public:
     virtual ~Heroes() {}
     
     virtual void printInfo() const = 0; // Виртуальный метод для вывода информации
-    /*
-    virtual void saveToFile(ofstream& file) const = 0; // Виртуальный метод для сохранения данных в файл
-    virtual void loadFromFile(ifstream& file) = 0; // Виртуальный метод для загрузки данных из файла
-    */
+    virtual void saveToFile(ofstream& file) const; // Виртуальный метод для сохранения данных в файл
+    virtual void loadFromFile(ifstream& file); // Виртуальный метод для загрузки данных из файла
+    virtual void changeSpec();
 
     // Сеттеры
     void setName(const string& n) { name = n; }

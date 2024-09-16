@@ -35,4 +35,7 @@ public:
     void inputData();//ввод данных пользователем
     void print();//вывод данных на экран
     void printInfo() const; //вывод данных на экран
+    void saveToFile(ofstream& file) const;
+    void loadFromFile(ifstream& file);
+    void changeSpec();
 };

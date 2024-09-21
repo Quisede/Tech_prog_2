@@ -9,9 +9,11 @@ using namespace std;
 Monsters::Monsters() : Heroes(), description("") {}
 
 Monsters::Monsters(const string& name, const string& description) : Heroes(name), description(description) {}
-/*
-Monsters::Monsters(const Monsters& copy) : name(copy.name), description(copy.description){}
-*/
+
+Monsters::Monsters(const Monsters& copy) :
+    Heroes(copy), // Инициализация базового класса
+    description(copy.description) {} 
+
 Monsters::~Monsters() {
 }
 
@@ -36,15 +38,16 @@ string Monsters::getDescription() const {
 }
 
 void Monsters::inputData() {
+    cin.ignore();
 
     cout << "Введите имя Монстра: ";
     string inputName;
-    cin >> inputName;
+    getline(cin, inputName);
     setName(inputName);
 
     cout << "Введите описание монстра: ";
     string inputDescription;
-    cin >> inputDescription;
+    getline(cin, inputDescription);
     setDescription(inputDescription);
 }
 
@@ -62,14 +65,17 @@ void Monsters::saveToFile(ofstream& file) const {
 }
 
 void Monsters::loadFromFile(ifstream& file) {
-    file >> name;
-    file >> description;
+    getline(file, name);
+    getline(file, name);          // Считываем полное имя, включая пробелы
+    getline(file, description);   // Считываем описание
 }
 
 void Monsters::changeSpec() {
     int answer = 0;
+    cin.ignore();
     cout << "Что вы хотите изменить?\n1 - Имя\n2 - Описание" << endl;
     cin >> answer;
+    system("cls");
     if (answer == 1) {
         cout << "Введите новое имя" << endl;
         string new_name;

@@ -4,7 +4,6 @@
 using namespace std;
 
 struct Node{
-	//string name;
 	Heroes* hero;//указатель на объект героя
 	Node* next;//указатель на следующий узел
 
@@ -21,7 +20,7 @@ public:
 	void add(Heroes* hero);//добавление объекта в список
 	void print() const;
 	void printTypeHero(int type) const;
-	Node& operator[](int id);
+	//Node& operator[](int id);
 	Node* getHead() { return head; }
 	void setHead(Node* newHead) { head = newHead; }
 };

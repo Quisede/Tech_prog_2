@@ -12,19 +12,16 @@ Positive_Heroes::Positive_Heroes() :
 
 Positive_Heroes::Positive_Heroes(const string& n, const string& w, const string& s) :
     Heroes(n), wearponType(w), skills(s) {}
-/*
+
 Positive_Heroes::Positive_Heroes(const Positive_Heroes& copy) :
-    name(copy.name), wearponType(copy.wearponType), skills(copy.skills) {}
-*/
+    Heroes(copy), // Инициализация базового класса с помощью конструктора копирования
+    wearponType(copy.wearponType), // Копируем тип оружия
+    skills(copy.skills) {} // Копируем навыки
 
 Positive_Heroes::~Positive_Heroes() {}
 
 //сеттеры
-/*
-void Positive_Heroes::setName(string& n) {
-    name = n;
-}
-*/
+
 void Positive_Heroes::setWearponType(string& w) {
     wearponType = w;
 }
@@ -34,11 +31,7 @@ void Positive_Heroes::setSkills(string& s) {
 }
 
 //геттеры
-/*
-string Positive_Heroes::getName() const {
-    return name;
-}
-*/
+
 string Positive_Heroes::getWearponType() const {
     return wearponType;
 }
@@ -48,24 +41,26 @@ string Positive_Heroes::getSkills() const {
 }
 
 //функции
+//ввод данных
 void Positive_Heroes :: inputData() {
-    
+    cin.ignore();
+
     cout << "Введите имя героя: ";
     string inputName;
-    cin >> inputName;
+    getline(cin, inputName);
     setName(inputName); 
    
     cout << "Введите тип оружия: ";
     string inputWType;
-    cin >> inputWType;
+    getline(cin, inputWType);
     setWearponType(inputWType);
 
     cout << "Введите навыки героя: ";
     string skills;
-    cin >> skills;
+    getline(cin, skills);
     setSkills(skills);
 }
-
+//печать данных
 void Positive_Heroes::print() {
     cout << "Герой:" << endl;
     //cout << "Имя: " << getName() << endl;
@@ -90,16 +85,21 @@ void Positive_Heroes::saveToFile(ofstream& file) const {
 }
 
 void Positive_Heroes::loadFromFile(ifstream& file) {
-    //getline(file, name);
-    file >> name;
-    file >> wearponType; 
-    file >> skills;
+    getline(file, name);
+    //file >> name;
+    //file >> wearponType; 
+    //file >> skills;
+    getline(file, name);          // Считываем полное имя, включая пробелы
+    getline(file, wearponType);   // Считываем тип оружия
+    getline(file, skills);        // Считываем навыки
 }
 
 void Positive_Heroes::changeSpec() {
     int answer = 0;
+    cin.ignore();
     cout << "Что вы хотите изменить?\n1 - Имя\n2 - Тип оружия\n3 - Скиллы" << endl;
     cin >> answer;
+    system("cls");
     if (answer == 1) {
         cout << "Введите новое имя" << endl;
         string new_name;

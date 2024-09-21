@@ -6,6 +6,7 @@
 
 using namespace std;
 
+//функция добавления в список (узела)
 void List::add(Heroes* hero) {
     Node* newNode = new Node{hero};
     if (head == nullptr) {
@@ -20,7 +21,7 @@ void List::add(Heroes* hero) {
     }
     ++size;
 }
-
+//прогоняем весь список и печатаем
 void List::print() const{
     Node* current = head;
     while (current != nullptr) {
@@ -28,7 +29,7 @@ void List::print() const{
         current = current->next;
     }
 }
-
+/*
 Node& List::operator[](int id) {
     Node* current = head;
     int count = 0;
@@ -41,7 +42,8 @@ Node& List::operator[](int id) {
         count++;
     }
 }
-
+*/
+//отрисовка типа героя
 void List::printTypeHero(int type) const {
     Node* current = head;
     while (current != nullptr) {

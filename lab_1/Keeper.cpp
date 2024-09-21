@@ -3,27 +3,19 @@
 #include <fstream>
 using namespace std;
 
-//Keeper::Keeper() : head(nullptr), size(0) {}
-/*
-Keeper::~Keeper() {
-    Node* current = head;
-    while (current) {
-        Node* next = current->next;
-        delete current->hero;  // Удаление объекта героя
-        delete current;        // Удаление узла
-        current = next;
-    }
-}
-*/
+//функцмя добавения героя в список
 void Keeper::addHero(Heroes* hero) {
     heroesList.add(hero);
 }
 
+//функция печати информации о всех героях
 void Keeper::printHeroes() const {
     heroesList.print(); // Печать информации о всех героях
 }
 
+//функция отчистки списка
 void Keeper::clearHeroes() {
+    //ставим указатель на головной элемент и прогоняем весь список, отчищая данные
     Node* current = heroesList.getHead();
     while (current != nullptr) {
         Node* next = current->next;
@@ -34,59 +26,73 @@ void Keeper::clearHeroes() {
     heroesList = List(); // Сброс списка
 }
 
+//функция удаления героя
 void Keeper::removeHero() {
     cout << "Какого персонажа вы хотите удалить?:\n1)Героя\n2)Злодея\n3)Монстра\n";
     int choice = 0;
     int choice_2 = 0;
+    cin >> choice;
 
-    while (choice != 3) {
-        cin >> choice;
-
+    while (choice != 4) {
+        cin.ignore();
         switch (choice) {
         case 1: {
             system("cls");
             cout << "1)Найти персонажа по имени\n2)Показать всех персонажей\n3)Выйти\n";
             cin >> choice_2;
 
+            system("cls");
+
             if (choice_2 == 1) {
-                string s;
+                //поиск по имени
                 system("cls");
-                cout << "Введите имя персонажа:\n";
-                cin >> s;
+                cin.ignore();
+                string s;
+                //запрашиваем имя
+                cout << "Введите имя персонажа: ";
+                getline(cin, s); 
+                cout << s << endl;
+                //передаем это имя на функцию удаления персонажа по имени
                 removeByName(s); // Удаление персонажа по имени
+                system("pause");
                 system("cls");
             }
             if (choice_2 == 2) {
+                //показ всех персонажей
                 if (choice == 1)
                     cout << "ВСЕ ГЕРОИ" << endl;
                 if (choice == 2)
                     cout << "ВСЕ ЗЛОДЕИ" << endl;
                 if (choice == 3)
                     cout << "ВСЕ МОНСТРЫ" << endl;
-
+                
                 system("cls");
                 heroesList.printTypeHero(choice);
                 system("pause");
                 system("cls");
             }
             if (choice_2 == 3) {
+                //Выход из доп меню
                 system("cls");
                 break;
             }
+            //на случай некорректного ввода
             if (choice_2 != 1 && choice_2 != 2 && choice_2 != 3) {
                 cout << "Вы ввели неверное значение, попробуйте снова" << endl;
             }
+            system("pause");
             break; // Выход из switch
         }
         case 2: {
             system("cls");
             cout << "1)Найти персонажа по имени\n2)Показать всех персонажей\n3)Выйти\n";
+            cin.ignore();
             cin >> choice_2;
             system("cls");
             if (choice_2 == 1) {
                 string s;
                 cout << "Введите имя персонажа:\n";
-                cin >> s;
+                getline(cin, s);
                 removeByName(s); // Удаление персонажа по имени
             }
             if (choice_2 == 2) {
@@ -103,22 +109,25 @@ void Keeper::removeHero() {
             if (choice_2 == 3) {
                 break;
             }
-            else {
+            if (choice_2 != 1 && choice_2 != 2 && choice_2 != 3) {
                 cout << "Вы ввели неверное значение, попробуйте снова" << endl;
             }
-            
+            system("pause");
+            system("cls");
             break; // Выход из switch
         }
         case 3: {
             system("cls");
             cout << "1)Найти персонажа по имени\n2)Показать всех персонажей\n3)Выйти\n";
             cin >> choice_2;
-
+            system("cls");
             if (choice_2 == 1) {
                 string s;
+                cin.ignore();
                 cout << "Введите имя персонажа:\n";
-                cin >> s;
+                getline(cin, s);
                 removeByName(s); // Удаление персонажа по имени
+                //break;
             }
             if (choice_2 == 2) {
                 if (choice == 1)
@@ -130,35 +139,32 @@ void Keeper::removeHero() {
 
 
                 heroesList.printTypeHero(choice);
+
             }
             if (choice_2 == 3) {
                 break;
             }
-            else {
+            if (choice_2 != 1 && choice_2 != 2 && choice_2 != 3) {
                 cout << "Вы ввели неверное значение, попробуйте снова" << endl;
             }
             
+            system("pause");
+            system("cls");
             break; // Выход из switch
         }
         default:
             cout << "Неверный выбор. Пожалуйста, попробуйте снова." << endl;
             break;
         }
+        break;
     }
 }
-
-Heroes* Keeper::searchName(string& s) {/*
-    Node* current = heroesList.getHead();
-    while (current != nullptr) {
-        if (current->hero->getName() == s) {
-            return current->hero;//возвращаем указатель на найденный объект
-        }
-    }
-    cout << "ERROR";
-    return nullptr;//если ничего не нашли*/
+//функция поиска по имени, возвращает указатель на нужный объект класса
+Heroes* Keeper::searchName(string& s) {
     Node* current = heroesList.getHead();  // Начинаем с головы списка
     while (current != nullptr) {
-        if (current->hero->getName() == s) {
+        //if (current->hero->getName() == s) {
+          if (strcmp(current->hero->getName().c_str(), s.c_str()) == 0){
             return current->hero;  // Возвращаем указатель на найденного героя
         }
         current = current->next;  // Переходим к следующему узлу
@@ -166,9 +172,9 @@ Heroes* Keeper::searchName(string& s) {/*
     cout << "ERROR: Герой с именем " << s << " не найден." << endl;
     return nullptr;  // Если ничего не нашли, возвращаем nullptr
 }
-
+//удаление по имени
 void Keeper::removeByName(string& n) {
-    Node* current = heroesList.getHead();//екущий узел
+    Node* current = heroesList.getHead();//текущий узел
     Node* previous = nullptr;//предыдущий узел
 
     while (current != nullptr) {
@@ -189,12 +195,13 @@ void Keeper::removeByName(string& n) {
     }
     cout << "Герой с именем " << n << " не найден.\n";
 }
-
+//функция сохранения в файл
 void Keeper::saveToFile(const char* filename) {
-    Node* current = heroesList.getHead();
+    Node* current = heroesList.getHead();//ставим указатель на головной элемент списка
 
-    ofstream file(filename);
+    ofstream file(filename);//открываем файл для записи
 
+    //если файл открылся, то пробегаем циклом по списку и сохраняем данные в файл
     if (file.is_open()){
         while (current != nullptr) {
             current->hero->saveToFile(file);
@@ -208,8 +215,10 @@ void Keeper::saveToFile(const char* filename) {
     }
 }
 
+//выгрузка из файла
 void Keeper::loadFromFile(const char* filename) {
     int answer = 0;
+    //открываем для чтения
     ifstream file(filename);
 
     if (!file.is_open()) {
@@ -228,9 +237,12 @@ void Keeper::loadFromFile(const char* filename) {
         return;
     }
 
+    //перед загрузкой текущие данные удаляются 
+
     clearHeroes();//очистка контейнера перед загрузкой
 
     string type;
+    //в зависимости от типа объекта заносим его в соответствующий класс
     while (file >> type) {
         Heroes* hero = nullptr;
 

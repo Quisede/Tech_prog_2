@@ -10,19 +10,18 @@ Villains::Villains() :
 
 Villains::Villains(string& n, string& w, string& c, string& l, string& s) :
     Heroes(), wearponType(w), crime(c), location(l), skills(s) {}
-/*
+
 Villains::Villains(const Villains& copy) :
-    name(copy.name), wearponType(copy.wearponType), crime(copy.crime), location(copy.location), skills(copy.skills) {}
-    */
+    Heroes(copy), // Инициализация базового класса
+    wearponType(copy.wearponType), // Копируем тип оружия
+    crime(copy.crime), // Копируем преступление
+    location(copy.location), // Копируем локацию
+    skills(copy.skills) {} // Копируем навыки
 
 Villains::~Villains() {}
 
 //сеттеры
-/*
-void Villains::setName(string& n) {
-    name = n;
-}
-*/
+
 void Villains::setWearponType(string& w) {
     wearponType = w;
 }
@@ -40,11 +39,7 @@ void Villains::setSkills(string& s) {
 }
 
 //геттеры
-/*
-string Villains::getName() const {
-    return name;
-}
-*/
+
 string Villains::getWearponType() const {
     return wearponType;
 }
@@ -62,30 +57,31 @@ string Villains::getSkills() const {
 }
 
 void Villains::inputData() {
+    cin.ignore();
 
     cout << "Введите имя Злодея: ";
     string inputName;
-    cin >> inputName;
+    getline(cin, inputName);
     setName(inputName);
 
     cout << "Введите тип оружия: ";
     string inputWT;
-    cin >> inputWT;
+    getline(cin, inputWT);
     setWearponType(inputWT);
 
     cout << "Введите преступления: ";
     string inputCrime;
-    cin >> inputCrime;
+    getline(cin, inputCrime);
     setCrime(inputCrime);
 
     cout << "Введите локацию: ";
     string inputLocation;
-    cin >> inputLocation;
+    getline(cin, inputLocation);
     setLocation(inputLocation);
 
     cout << "Введите скиллы: ";
     string inputSkills;
-    cin >> inputSkills;
+    getline(cin, inputSkills);
     setSkills(inputSkills);
 }
 
@@ -109,17 +105,20 @@ void Villains::saveToFile(ofstream& file) const {
 }
 
 void Villains::loadFromFile(ifstream& file) {
-    file >> name;
-    file >> wearponType;
-    file >> crime;
-    file >> location;
-    file >> skills;
+    getline(file, name);
+    getline(file, name);          // Считываем полное имя, включая пробелы
+    getline(file, wearponType);   // Считываем тип оружия
+    getline(file, crime);         // Считываем преступление
+    getline(file, location);      // Считываем местоположение
+    getline(file, skills);        // Считываем навыки
 }
 
 void Villains::changeSpec() {
     int answer = 0;
+    cin.ignore();
     cout << "Что вы хотите изменить?\n1 - Имя\n2 - Тип оружия\n3 - Преступления\n4 - Локации\n5 - Скиллы" << endl;
     cin >> answer;
+    system("cls");
     if (answer == 1) {
         cout << "Введите новое имя" << endl;
         string new_name;
